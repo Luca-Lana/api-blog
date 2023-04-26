@@ -1,6 +1,6 @@
 # Sobre 
 
-Pedi para que o chat GPT me falar um projeto para ser feito em NodeJS cujo o grau de dificuldade fosse intermediário e vou desenvolver esse projeto seguindo as instruções passadas por ele
+Pedi para que o chat GPT me falar um projeto para ser feito em NodeJS cujo o grau de dificuldade fosse intermediário e vou desenvolver esse projeto seguindo as instruções passadas por ele.
 
 # Instruções 🖥
 
@@ -23,8 +23,6 @@ Paginação: Implemente a paginação para exibir apenas um número limitado de 
 Validação e tratamento de erros: Realize a validação dos dados enviados nas solicitações para garantir a integridade dos dados e trate adequadamente os erros, fornecendo respostas adequadas com códigos de status HTTP apropriados.
 
 Armazenamento de dados: Utilize um banco de dados, como o MongoDB, para armazenar as informações das postagens, usuários e comentários.
-
-Essa é apenas uma visão geral de um projeto intermediário de backend em Node.js. Você pode personalizar e adicionar recursos adicionais de acordo com suas preferências e requisitos específicos. Lembre-se de seguir boas práticas de desenvolvimento, como separação de preocupações (como MVC ou arquitetura similar), e considerar a segurança e o desempenho ao implementar a API.
 
 # Bibliotecas 📚
 
