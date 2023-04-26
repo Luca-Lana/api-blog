@@ -1,0 +1,19 @@
+{
+  "name": "api-de-blog",
+  "version": "1.0.0",
+  "description": "Uma API de blog permite que os usuários criem, leiam, atualizem e excluam posts em um blog",
+  "main": "index.js",
+  "scripts": {
+    "serve": "nodemon index.js"
+  },
+  "keywords": [],
+  "author": "Luca Lana",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.1.0",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.0",
+    "mongoose": "^7.0.5"
+  }
+}
