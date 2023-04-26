@@ -4,7 +4,7 @@
   "description": "Uma API de blog permite que os usuários criem, leiam, atualizem e excluam posts em um blog",
   "main": "index.js",
   "scripts": {
-    "serve": "nodemon index.js"
+    "serve": "nodemon src/index.js"
   },
   "keywords": [],
   "author": "Luca Lana",
