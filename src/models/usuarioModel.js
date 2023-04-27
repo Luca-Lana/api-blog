@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 const dataUtils = require('../utils/dataUtils')
-const bcryptUtils = require('../utils/bcryptUtils')
+const { criarHash } = require('../utils/bcryptUtils')
 
 const usuarioSchema = new mongoose.Schema({
 	nome: {
@@ -11,11 +11,8 @@ const usuarioSchema = new mongoose.Schema({
 	email: {
 		type: String,
 		index: true,
-		unique:true,
-		required: function () {
-			const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-			return emailRegex.test(this.email)
-		}
+		unique: true,
+		required: true
 	},
 
 	senha: {
@@ -25,16 +22,25 @@ const usuarioSchema = new mongoose.Schema({
 
 	criado_em: {
 		type: Date,
-		default: dataUtils.dataAtual('DD/MM/YYYY')
+		default: dataUtils.dataAtual('YYYY-MM-DD')
 	}
 })
 
-UserSchema.pre('save', async (next) => {
-
-	this.senha = await bcryptUtils.criarHash(this.senha)
+usuarioSchema.pre('save', async function(next) {
+	this.senha = await criarHash(this.senha)
 	next()
 })
 
-const usuarioModel = mongoose.Model('usuario', usuarioSchema, 'usuarios')
+usuarioSchema.pre('validate', function(next) {
+	const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+  if (!emailRegex.test(this.email)) {
+    this.invalidate('email', 'Email inválido')
+  }
+
+  next()
+})
+
+
+const usuarioModel = mongoose.model('usuarios', usuarioSchema)
 
 module.exports = usuarioModel
