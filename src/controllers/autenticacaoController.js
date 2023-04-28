@@ -28,7 +28,7 @@ module.exports = {
 		let {email, senha} = req.body
 		try {
 			let resultado = await usuarioModel.findOne({email: email})
-			if (!resultado && validarEmail(email)) {
+			if (!resultado && !validarEmail(email)) {
 				res.status(400).json({msg: 'Email incorreto'})
 			} else {
 				let senhaValida = await verificarSenha(senha,resultado.senha)
