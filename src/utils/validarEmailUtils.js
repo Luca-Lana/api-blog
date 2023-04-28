@@ -1,6 +1,6 @@
 module.exports = (email) => {
 	const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-  if (!emailRegex.test(this.email)) {
+  if (!emailRegex.test(email)) {
   	return false
   }
   return true
