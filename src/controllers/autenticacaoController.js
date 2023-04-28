@@ -1,4 +1,5 @@
-const { criarHash, verificarSenha} = require('../utils/bcryptUtils')
+const { verificarSenha } = require('../utils/bcryptUtils')
+const { criarToken } = require('../utils/jwtUtils')
 const usuarioModel = require('../models/usuarioModel')
 
 module.exports = {
@@ -16,7 +17,7 @@ module.exports = {
 			} else if (erro.message.includes('Email inválido')) {
 				res.status(400).json({msg: 'Email inválido'})
 			} else {
-				res.status(400).json({msg: 'Erro ao criar usuário'})
+				res.status(500).json({msg: 'Erro ao criar usuário'})
 			}
 		}
 		
@@ -24,6 +25,21 @@ module.exports = {
 
 	async logarUsuario(req, res) {
 		let {email, senha} = req.body
-		res.json({email, senha, senhaValida})
+		try {
+			let resultado = await usuarioModel.findOne({email: email})
+			if (!resultado) {
+				res.status(400).json({msg: 'Email incorreto'})
+			} else {
+				let senhaValida = await verificarSenha(senha,resultado.senha)
+				if (senhaValida) {
+					let token = await criarToken({id: resultado._id, email: resultado.email})
+					res.status(200).json({msg: 'Logado', token})
+				} else {
+					res.status(400).json({msg: 'Senha incorreta'})
+				}
+			}
+		} catch (erro) {
+			res.status(500).json({msg: 'Erro ao logar'})
+		}
 	}
 }
