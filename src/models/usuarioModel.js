@@ -1,6 +1,7 @@
 const mongoose = require('mongoose')
 const dataUtils = require('../utils/dataUtils')
 const { criarHash } = require('../utils/bcryptUtils')
+const validarEmail = require('../utils/validarEmailUtils')
 
 const usuarioSchema = new mongoose.Schema({
 	nome: {
@@ -32,8 +33,7 @@ usuarioSchema.pre('save', async function(next) {
 })
 
 usuarioSchema.pre('validate', function(next) {
-	const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-  if (!emailRegex.test(this.email)) {
+  if (validarEmail(this.email)) {
     this.invalidate('email', 'Email inválido')
   }
 

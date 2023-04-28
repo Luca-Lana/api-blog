@@ -1,6 +1,7 @@
 const { verificarSenha } = require('../utils/bcryptUtils')
 const { criarToken } = require('../utils/jwtUtils')
 const usuarioModel = require('../models/usuarioModel')
+const validarEmail = require('../utils/validarEmailUtils')
 
 module.exports = {
 	async cadastrarUsuario(req, res) {
@@ -27,7 +28,7 @@ module.exports = {
 		let {email, senha} = req.body
 		try {
 			let resultado = await usuarioModel.findOne({email: email})
-			if (!resultado) {
+			if (!resultado && validarEmail(email)) {
 				res.status(400).json({msg: 'Email incorreto'})
 			} else {
 				let senhaValida = await verificarSenha(senha,resultado.senha)
