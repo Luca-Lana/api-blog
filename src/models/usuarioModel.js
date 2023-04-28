@@ -33,7 +33,7 @@ usuarioSchema.pre('save', async function(next) {
 })
 
 usuarioSchema.pre('validate', function(next) {
-  if (validarEmail(this.email)) {
+  if (!validarEmail(this.email)) {
     this.invalidate('email', 'Email inválido')
   }
 
