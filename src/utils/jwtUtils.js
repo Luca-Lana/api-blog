@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken')
-const jwtConfig = ('../config/jwtConfig')
+const jwtConfig = require('../config/jwtConfig')
 
 module.exports = {
 	criarToken(objeto) {
