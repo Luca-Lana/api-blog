@@ -4,8 +4,6 @@ const dataUtils = require('../utils/dataUtils')
 const publicacaoSchema = new mongoose.Schema({
 	titulo: {
 		type: String,
-		index: true,
-		unique: true,
 		required: true
 	},
 
