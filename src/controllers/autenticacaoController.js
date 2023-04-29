@@ -7,9 +7,8 @@ module.exports = {
 	async cadastrarUsuario(req, res) {
 		let {nome, email, senha} = req.body
 		try {
-			const novoUsuario = new usuarioModel({nome, email, senha})
-			let resultado = await novoUsuario.save()
-			if (resultado === novoUsuario) {
+			let resultado = await usuarioModel.create({nome, email, senha})
+			if (resultado.nome) {
 				res.status(201).json({msg: 'Usuário criado com sucesso'})
 			}
 		} catch (erro) {
