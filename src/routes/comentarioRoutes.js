@@ -4,7 +4,7 @@ const validarRequisicao = require('../middleware/autenticacaoMiddleware')
 
 router.use(validarRequisicao)
 
-router.post('/comentarios', comentarioController.criarComentario)
+router.post('/comentarios/:id', comentarioController.criarComentario)
 
 router.delete('/comentarios/:id', comentarioController.removerComentario)
 
