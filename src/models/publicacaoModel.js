@@ -3,7 +3,7 @@ const dataUtils = require('../utils/dataUtils')
 
 const publicacaoSchema = new mongoose.Schema({
 	
-	autor: {
+	idAutor: {
 		type: String,
 		index: true,
 		required: true
@@ -22,10 +22,6 @@ const publicacaoSchema = new mongoose.Schema({
 	criado_em: {
 		type: Date,
 		default: dataUtils.dataAtual('YYYY-MM-DD')
-	},
-
-	atualizado_em: {
-		type: Date,
 	}
 })
 

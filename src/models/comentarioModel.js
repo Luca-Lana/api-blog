@@ -3,13 +3,13 @@ const dataUtils = require('../utils/dataUtils')
 
 const comentarioSchema = new mongoose.Schema({
 	
-	autor: {
+	idAutor: {
 		type: String,
 		index: true,
 		required: true
 	},
 
-	post: {
+	idPublicacao: {
 		type: String,
 		required: true
 	},
@@ -22,10 +22,6 @@ const comentarioSchema = new mongoose.Schema({
 	criado_em: {
 		type: Date,
 		default: dataUtils.dataAtual('YYYY-MM-DD')
-	},
-
-	atualizado_em: {
-		type: Date,
 	}
 })
 
