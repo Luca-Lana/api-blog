@@ -5,7 +5,7 @@ module.exports = {
 
 	async obterPublicacoes (req, res) {
 		try {
-			let resultado = await publicacaoModel.find().select(['autor', 'titulo', 'conteudo', 'criado_em'])
+			let resultado = await publicacaoModel.find().select(['idAutor', 'titulo', 'conteudo', 'criado_em'])
 			res.status(200).json({publicacoes: resultado})
 		} catch (erro) {
 			console.error(erro)
@@ -17,9 +17,9 @@ module.exports = {
 		try {
 			const { id:idPublicacao } = req.params
 			let resultadoPublicacao = await publicacaoModel.findOne({_id: idPublicacao})
-																				.select(['autor', 'titulo', 'conteudo', 'criado_em', 'atualizado_em'])
+																				.select(['idAutor', 'titulo', 'conteudo', 'criado_em', 'atualizado_em'])
 			let resultadoComentarios = await comentarioModel.find({post: resultadoPublicacao._id})
-																				.select(['autor', 'conteudo', 'criado_em', 'atualizado_em'])
+																				.select(['idAutor', 'conteudo', 'criado_em', 'atualizado_em'])
 			res.status(200).json({publicacao: resultadoPublicacao, comentarios: resultadoComentarios})
 		} catch (erro) {
 			if (erro.message.includes('Cast to ObjectId')) {
@@ -34,7 +34,7 @@ module.exports = {
 		try {
 			let { titulo, conteudo} = req.body
 			let { autor } = req.headers			
-			await publicacaoModel.create({autor, titulo, conteudo})
+			await publicacaoModel.create({idAutor, titulo, conteudo})
 			res.status(200).json({msg: 'Publicação criada com sucesso'})
 		} catch (erro) {
 			if (erro.message.includes('duplicate key')) {
