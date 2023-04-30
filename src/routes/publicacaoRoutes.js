@@ -9,4 +9,6 @@ router.use(validarRequisicao)
 
 router.post('/publicacoes', publicacaoController.criarPublicacao)
 
+router.delete('/publicacoes/:id', publicacaoController.removerPublicacao)
+
 module.exports = router

@@ -34,13 +34,28 @@ module.exports = {
 		try {
 			let { titulo, conteudo} = req.body
 			let { autor } = req.headers			
-			let resultado = await publicacaoModel.create({autor, titulo, conteudo})
+			await publicacaoModel.create({autor, titulo, conteudo})
 			res.status(200).json({msg: 'Publicação criada com sucesso'})
 		} catch (erro) {
 			if (erro.message.includes('duplicate key')) {
 				res.status(400).json({msg: 'Esse titulo já esta sendo usado'})
 			} else {
 				res.status(400).json({msg: 'Erro ao criar publicacão'})
+			}
+		}
+	},
+
+	async removerPublicacao(req, res) {
+		try {
+			let { id:idPublicacao } = req.params
+			await publicacaoModel.deleteOne({_id: idPublicacao})
+			await comentarioModel.deleteMany({post: idPublicacao})
+			res.status(200).json({msg: 'Publicação removida com sucesso'})
+		} catch (erro) {
+			if (erro.message.includes('Cast to ObjectId')) {
+				res.status(400).json({msg: 'Publicação não existe'})
+			} else {
+				res.status(400).json({msg: 'Erro ao remover publicacão'})
 			}
 		}
 	}
